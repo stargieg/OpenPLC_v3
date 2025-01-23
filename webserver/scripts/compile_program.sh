@@ -64,7 +64,7 @@ if [ "$OPENPLC_PLATFORM" = "win" ]; then
     echo "Generating glueVars..."
     ./glue_generator
     echo "Compiling main program..."
-    g++ *.cpp *.o -o openplc -I ./lib -pthread -fpermissive -I /usr/local/include/modbus -L /usr/local/lib -lmodbus -w
+    g++ *.cpp *.o -o openplc -I ./lib -pthread -fpermissive -I /usr/local/include/modbus -L /usr/local/lib -lmodbus -I /usr/include/modbus -w
     if [ $? -ne 0 ]; then
         echo "Error compiling C files"
         echo "Compilation finished with errors!"
@@ -100,9 +100,9 @@ elif [ "$OPENPLC_PLATFORM" = "linux" ]; then
     ./glue_generator
     echo "Compiling main program..."
     if [ "$OPENPLC_DRIVER" = "sl_rp4" ]; then
-        g++ -std=gnu++11 *.cpp *.o -o openplc -I ./lib -pthread -fpermissive `pkg-config --cflags --libs libmodbus` -lasiodnp3 -lasiopal -lopendnp3 -lopenpal -w $ETHERCAT_INC -DSL_RP4
+        g++ -std=gnu++11 *.cpp *.o -o openplc -I ./lib -pthread -fpermissive -I /usr/include/modbus -lmodbus -lasiodnp3 -lasiopal -lopendnp3 -lopenpal -w $ETHERCAT_INC -DSL_RP4
     else
-        g++ -std=gnu++11 *.cpp *.o -o openplc -I ./lib -pthread -fpermissive `pkg-config --cflags --libs libmodbus` -lasiodnp3 -lasiopal -lopendnp3 -lopenpal -w $ETHERCAT_INC
+        g++ -std=gnu++11 *.cpp *.o -o openplc -I ./lib -pthread -fpermissive -I /usr/include/modbus -lmodbus -lasiodnp3 -lasiopal -lopendnp3 -lopenpal -w $ETHERCAT_INC
     fi
     if [ $? -ne 0 ]; then
         echo "Error compiling C files"
@@ -139,9 +139,9 @@ elif [ "$OPENPLC_PLATFORM" = "rpi" ]; then
     ./glue_generator
     echo "Compiling main program..."
     if [ "$OPENPLC_DRIVER" = "sequent" ]; then
-        g++ -DSEQUENT -std=gnu++11 *.cpp *.o -o openplc -I ./lib -lrt -lpigpio -lpthread -fpermissive `pkg-config --cflags --libs libmodbus` -lasiodnp3 -lasiopal -lopendnp3 -lopenpal -w 
+        g++ -DSEQUENT -std=gnu++11 *.cpp *.o -o openplc -I ./lib -lrt -lpigpio -lpthread -fpermissive -I /usr/include/modbus -lmodbus -lasiodnp3 -lasiopal -lopendnp3 -lopenpal -w 
     else    
-        g++ -std=gnu++11 *.cpp *.o -o openplc -I ./lib -lrt -lpigpio -lpthread -fpermissive `pkg-config --cflags --libs libmodbus` -lasiodnp3 -lasiopal -lopendnp3 -lopenpal -w
+        g++ -std=gnu++11 *.cpp *.o -o openplc -I ./lib -lrt -lpigpio -lpthread -fpermissive -I /usr/include/modbus -lmodbus -lasiodnp3 -lasiopal -lopendnp3 -lopenpal -w
     fi
     if [ $? -ne 0 ]; then
         echo "Error compiling C files"
@@ -170,7 +170,7 @@ elif [ "$OPENPLC_PLATFORM" = "opi" ]; then
     echo "Generating glueVars..."
     ./glue_generator
     echo "Compiling main program..."
-    g++ -std=gnu++11 *.cpp *.o -o openplc -I ./lib -lrt -lpthread -fpermissive `pkg-config --cflags --libs libmodbus` -lasiodnp3 -lasiopal -lopendnp3 -lopenpal -w $WIRINGOP_INC
+    g++ -std=gnu++11 *.cpp *.o -o openplc -I ./lib -lrt -lpthread -fpermissive -I /usr/include/modbus -lmodbus -lasiodnp3 -lasiopal -lopendnp3 -lopenpal -w $WIRINGOP_INC
     if [ $? -ne 0 ]; then
         echo "Error compiling C files"
         echo "Compilation finished with errors!"
