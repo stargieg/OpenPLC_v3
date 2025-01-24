@@ -80,6 +80,13 @@ elif [[ $1 == opi* ]]; then
     echo opi > ../scripts/openplc_platform
     echo "$1" > ../scripts/openplc_driver
 
+elif [ "$1" == "rpi_raspicomm" ]; then
+    echo "Activating Raspberry Pi 2011 driver with Raspi Comm"
+    cp ./hardware_layers/raspberrypi_raspicomm.cpp ./hardware_layer.cpp
+    echo "Setting Platform"
+    echo rpi > ../scripts/openplc_platform
+    echo rpi_raspicomm > ../scripts/openplc_driver
+
 elif [ "$1" == "simulink" ]; then
     echo "Activating Simulink driver"
     cp ./hardware_layers/simulink.cpp ./hardware_layer.cpp

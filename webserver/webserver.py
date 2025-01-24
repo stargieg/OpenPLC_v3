@@ -1730,6 +1730,8 @@ def hardware():
             else: return_str += "<option value='rpi'>Raspberry Pi</option>"
             if (current_driver == "rpi_old"): return_str += "<option selected='selected' value='rpi_old'>Raspberry Pi - Old Model (2011 model B)</option>"
             else: return_str += "<option value='rpi_old'>Raspberry Pi - Old Model (2011 model B)</option>"
+            if (current_driver == "rpi_raspicomm"): return_str += "<option selected='selected' value='rpi_raspicomm'>Raspberry Pi - Old Model (2011 model B) with Raspi Comm</option>"
+            else: return_str += "<option value='rpi_raspicomm'>Raspberry Pi - Old Model (2011 model B) with Raspi Comm</option>"
             if (current_driver == "opi_zero2"): return_str += "<option selected='selected' value='opi_zero2'>Orange Pi Zero2/Zero2 LTS/Zero2 B</option>"
             else: return_str += "<option value='opi_zero2'>Orange Pi Zero2/Zero2 LTS/Zero2 B</option>"
             if (current_driver == "simulink"): return_str += "<option selected='selected' value='simulink'>Simulink</option>"
