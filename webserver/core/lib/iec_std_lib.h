@@ -41,9 +41,7 @@
 #include <string.h>
 #include <stdarg.h>
 
-#ifdef __CYGWIN__
 #include <sys/types.h>
-#endif
 
 #ifdef DEBUG_IEC
 #define DBG(...) printf(__VA_ARGS__);

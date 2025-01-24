@@ -4,6 +4,7 @@
 #include <limits.h>
 #include <float.h>
 #include <stdint.h>
+#include <sys/types.h>
 
 /*********************/
 /*  IEC Types defs   */
