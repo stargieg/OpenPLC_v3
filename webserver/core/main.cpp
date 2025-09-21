@@ -37,6 +37,8 @@
 #include "ethercat_src.h"
 #endif
 
+#include "oplc_snap7.h"
+
 #define OPLC_CYCLE          50000000
 
 extern int opterr;
@@ -57,7 +59,7 @@ uint32_t *dint_input_call_back(int a){ return dint_input[a]; }
 uint32_t *dint_output_call_back(int a){ return dint_output[a]; }
 uint64_t *lint_input_call_back(int a){ return lint_input[a]; }
 uint64_t *lint_output_call_back(int a){ return lint_output[a]; }
-void logger_callback(char *msg){ log(msg);}
+void logger_callback(char *msg){ openplc_log(msg);}
 
 int main(int argc,char **argv)
 {
@@ -73,7 +75,7 @@ int main(int argc,char **argv)
 
     char log_msg[1000];
     sprintf(log_msg, "OpenPLC Runtime starting...\n");
-    log(log_msg);
+    openplc_log(log_msg);
 
     //======================================================
     //                 PLC INITIALIZATION
@@ -103,6 +105,7 @@ int main(int argc,char **argv)
 #endif
     initializeHardware();
     initializeMB();
+
     updateBuffersIn();
     updateBuffersOut();
 
@@ -114,7 +117,12 @@ int main(int argc,char **argv)
     readPersistentStorage();
     //pthread_t persistentThread;
     //pthread_create(&persistentThread, NULL, persistentStorage, NULL);
-    
+
+    //======================================================
+    //            S7 PROTOCOL INITIALIZATION
+    //======================================================
+    initializeSnap7();
+
 
 
 #ifdef __linux__
@@ -243,6 +251,8 @@ int main(int argc,char **argv)
 #ifdef _ethercat_src
     ethercat_terminate_src();
 #endif
+
+    finalizeSnap7();
     printf("Disabling outputs\n");
     disableOutputs();
     updateBuffersOut();
