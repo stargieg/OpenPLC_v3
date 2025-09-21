@@ -564,7 +564,7 @@ int processEnipMessage(unsigned char *buffer, int buffer_size)
     {
         // log UNKNOWN Enip Type message to open plc 
         sprintf(log_msg, "ENIP: Received unsupported EtherNet/IP Type\n");
-        log(log_msg);
+        openplc_log(log_msg);
     }
     
     //writeDataContents(&enipDataUnknown);
@@ -586,7 +586,7 @@ int processEnipMessage(unsigned char *buffer, int buffer_size)
     }*/
     else
     {
-        p = sprintf(p, "Unknown EtherNet/IP request: ");
+        p += sprintf(p, "Unknown EtherNet/IP request: ");
         int msg_size;
         if (((buffer_size * 3) + 40) < log_msg_max_size) // Each byte on buffer takes 3 bytes to be printed using "%02x ". Add 40 extra bytes for "preamble"
         {
@@ -603,7 +603,7 @@ int processEnipMessage(unsigned char *buffer, int buffer_size)
             p += sprintf(p, "%02x ", (unsigned char)buffer[i]);
         }
         p += sprintf(p, "\n");
-        log(log_msg);
+        openplc_log(log_msg);
 
         return -1;
     }
