@@ -1886,13 +1886,16 @@ __end:
 
 
 #include "communication.h"
+#include "../c_blocks.h"
 #if defined(SEQUENT)
     #include "sm_cards.h"
 #endif
 #if defined(SL_RP4)
     #include "SL-RP4.h"
 #endif
-
+#if defined(SYNERGY)
+    #include "synergy.h"
+#endif
 
 
 
